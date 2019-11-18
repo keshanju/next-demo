@@ -10,5 +10,5 @@ import { MongooseModule } from '@nestjs/mongoose';
   providers: [],
 })
 export class AppModule {
-
+  // 应用程序的根模块
 }
