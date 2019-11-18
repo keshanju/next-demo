@@ -7,8 +7,4 @@ export const UserSchema = new mongoose.Schema(
     age: Number,
     sex: Boolean,
   },
-  {
-    collections: 'vipI',
-    versionKey: false,
-  },
 );

@@ -8,8 +8,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [MongooseModule.forFeature([
     {
-      name: 'User',
-      schema: UserSchema,
+      name: 'user', // 此处的值必须对应于service中的注入model值
+      schema: UserSchema, // 每一个表格对应的schema
+      collection: 'vipI', // 此处的值对应于数据库中对应的表格名
     },
   ])],
   controllers: [UserController],
