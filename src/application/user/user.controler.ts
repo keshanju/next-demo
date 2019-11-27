@@ -1,30 +1,68 @@
-import { Controller, Get, Post, Param, Query, Response, Res, Req, Next, Header, HttpCode, Redirect, Body } from '@nestjs/common';
+import { CreateUserDto } from './create-user.dto';
+import { Controller, Get, Post, Param, Query, Res, Req, Session, Headers, Next, Header, HttpCode, Redirect, Body, Delete, Put, HttpStatus} from '@nestjs/common';
 import { UserService } from './user.service';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { UserModel } from './user.interface';
+
 
 @Controller('user')
 export class UserController {
 
-  constructor(protected readonly userService: UserService) {
-  }
+  constructor(private readonly userService: UserService) { };
 
-  @Get('getUserInfo1/:uid')
-  async getUserInfo1(@Req() request: Request, @Param('uid') params) {
-    console.log(params.id);
-    return await this.userService.getUserInfo();
-  }
-
-  @Get('getUserInfo')
-  async getUserInfo(): Promise<UserModel[]> {
-    return await this.userService.getUserInfo();
-  }
-
-  @Post('updateUserInfo/:uid')
+  /**
+   * 获取全部用户
+   * @param query 
+   */
+  @Get()
   @HttpCode(200)
-  @Header('Cache-Control', 'none')
-  @Redirect('https://www.baid.com/', 302)
-  async updateUserInfo(@Param('uid') uid) {
-    return await `it will soon update userInfo${uid}!`;
+  private async getUserInfo(@Query() query): Promise<UserModel[]> {
+    return await this.userService.getUserInfo();
+  }
+
+  /**
+   * 根据ID查找用户
+   * @param req 
+   * @param res 
+   * @param uid 
+   */
+  @Get(':uid')
+  @HttpCode(200)
+  private async getUserInfo1(@Req() req: Request, @Res() res: Response, @Param('uid') uid: string) {
+    const data = await this.userService.getUserInfo();
+    res.json(data);
+  }
+
+  /**
+   * 新增用户
+   * @param createUserDto 
+   */
+  @Post()
+  @HttpCode(200)
+  private async addUser(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
+    // return await `it will soon add one user!`;
+    this.userService.addUser(createUserDto)
+    res.status(HttpStatus.CREATED).send();
+  }
+
+  /**
+   * 更新
+   * @param uid 
+   * @param updateCatDto 
+   */
+  @Put(':uid')
+  @HttpCode(200)
+  update(@Param('uid') uid: string, @Body() updateCatDto) {
+    return `This action updates a #${uid} user`;
+  }
+
+  /**
+   * 删除
+   * @param uid 
+   */
+  @Delete(':uid')
+  @HttpCode(200)
+  private async deleteUser(@Param('uid') uid: string) {
+    return `This action removes a #${uid} user`;
   }
 }
