@@ -7,4 +7,7 @@ export const UserSchema = new mongoose.Schema(
     age: Number,
     sex: Boolean,
   },
+  {
+    collection: 'tb_user'
+  }
 );

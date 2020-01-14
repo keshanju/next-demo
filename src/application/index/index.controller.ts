@@ -3,11 +3,11 @@ import { IndexService } from './index.service';
 
 @Controller('index')
 export class IndexController {
-  constructor(private readonly appService: IndexService) {
+  constructor(private readonly indexService: IndexService) {
   }
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return this.indexService.getHello();
   }
 }

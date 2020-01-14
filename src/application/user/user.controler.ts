@@ -1,10 +1,7 @@
-import { CreateUserDto } from './create-user.dto';
 import { Controller, Get, Post, Param, Query, Res, Req, Session, Headers, Next, Header, HttpCode, Redirect, Body, Delete, Put, HttpStatus} from '@nestjs/common';
 import { UserService } from './user.service';
 import { Request, Response } from 'express';
-import { UserModel } from './user.interface';
-
-
+import { CreateUserDto } from './createUser.dto';
 @Controller('user')
 export class UserController {
 
@@ -16,7 +13,7 @@ export class UserController {
    */
   @Get()
   @HttpCode(200)
-  private async getUserInfo(@Query() query, @Req() request: Request): Promise<UserModel[]> {
+  private async getUserInfo(@Query() query, @Req() request: Request) {
     return await this.userService.getUserInfo();
   }
 
@@ -40,21 +37,21 @@ export class UserController {
    */
   @Post()
   @HttpCode(200)
-  private async addUser(@Body() createUserDto: CreateUserDto, @Res() res: Response, @Session() session) {
+  private async addUser(@Body() body: CreateUserDto, @Res() res: Response, @Session() session) {
     console.log(session);
     // return await `it will soon add one user!`;
-    this.userService.addUser(createUserDto)
+    this.userService.addUserInfo(body)
     res.status(HttpStatus.CREATED).send();
   }
 
   /**
    * 更新
    * @param uid 
-   * @param updateCatDto 
+   * @param body 
    */
   @Put(':uid')
   @HttpCode(200)
-  update(@Param('uid') uid: string, @Body() updateCatDto) {
+  update(@Param('uid') uid: string, @Body() body) {
     return `This action updates a #${uid} user`;
   }
 
