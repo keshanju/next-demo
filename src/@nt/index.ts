@@ -7,7 +7,7 @@ import { SQLService } from './services/SQLService';
 import { LoggerService } from './services/LoggerService';
 import { HttpStatusCode } from './controllers/CodeController';
 import { PureController } from './controllers/PureController';
-// import { AxiosModule }
+import { IncrementModule } from './modules/mongodb/increment.module'
 
 export {
     HttpStatusCode,
@@ -18,5 +18,6 @@ export {
     ConfigService,
     AxiosModule,
     LoggerModule,
-    ConfigModule
+    ConfigModule,
+    IncrementModule
 }
