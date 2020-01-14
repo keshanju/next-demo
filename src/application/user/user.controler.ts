@@ -1,4 +1,4 @@
-import { PureController } from './../../@nt/controllers/PureController';
+import { PureController } from 'src/@nt/controllers/PureController';
 import { Controller, Get, Post, Param, Query, Res, Req, Session, Headers, Next, Header, HttpCode, Redirect, Body, Delete, Put, HttpStatus} from '@nestjs/common';
 import { UserService } from './user.service';
 import { Request, Response } from 'express';

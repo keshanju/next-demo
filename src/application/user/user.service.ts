@@ -9,7 +9,7 @@ export interface User extends Document {
 }
 @Injectable()
 export class UserService {
-  constructor(@InjectModel('user') private readonly user: Model<User>) { };
+  constructor(@InjectModel('account') private readonly user: Model<User>) { };
 
   async getUserInfo(): Promise<User[]> {
     return await this.user.find().exec();

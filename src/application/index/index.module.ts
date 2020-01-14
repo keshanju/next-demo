@@ -5,10 +5,13 @@ import { IndexController } from './index.controller';
 import { IndexService } from './index.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([
-    {name: 'Index', schema: indexSchema }
-  ], 'DBBASE_TEST')],
+  imports: [
+    MongooseModule.forFeature(
+      [{ name: 'depositKY', schema: indexSchema }],
+      'DBBASE_ATFXKY',
+    ),
+  ],
   controllers: [IndexController],
   providers: [IndexService],
 })
-export class IndexModule { }
+export class IndexModule {}

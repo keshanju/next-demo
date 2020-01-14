@@ -11,7 +11,7 @@ export interface IndexInderFace extends Document {
 }
 @Injectable()
 export class IndexService {
-  constructor(@InjectModel('Index') private readonly indexModel: Model<IndexInderFace>) {  }
+  constructor(@InjectModel('depositKY') private readonly indexModel: Model<IndexInderFace>) {  }
   getHello(): string {
     return 'Hello World!';
   }
