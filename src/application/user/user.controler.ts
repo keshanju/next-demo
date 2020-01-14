@@ -16,7 +16,7 @@ export class UserController {
    */
   @Get()
   @HttpCode(200)
-  private async getUserInfo(@Query() query): Promise<UserModel[]> {
+  private async getUserInfo(@Query() query, @Req() request: Request): Promise<UserModel[]> {
     return await this.userService.getUserInfo();
   }
 
@@ -28,9 +28,10 @@ export class UserController {
    */
   @Get(':uid')
   @HttpCode(200)
-  private async getUserInfo1(@Req() req: Request, @Res() res: Response, @Param('uid') uid: string) {
+  private async getUserInfo1(@Req() request: Request, @Res() response: Response, @Param('uid') uid: string) {
+    console.log("request:>>>>>>>" + request)
     const data = await this.userService.getUserInfo();
-    res.json(data);
+    response.json(data);
   }
 
   /**
@@ -39,7 +40,8 @@ export class UserController {
    */
   @Post()
   @HttpCode(200)
-  private async addUser(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
+  private async addUser(@Body() createUserDto: CreateUserDto, @Res() res: Response, @Session() session) {
+    console.log(session);
     // return await `it will soon add one user!`;
     this.userService.addUser(createUserDto)
     res.status(HttpStatus.CREATED).send();
