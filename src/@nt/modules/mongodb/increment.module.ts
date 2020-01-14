@@ -6,9 +6,7 @@ import { incrementSchema } from "./increment.schema";
 @Global()
 @Module({
     imports: [MongooseModule.forFeature(
-        [
-            { name: "sys_increment", schema: incrementSchema }
-        ]
+        [{ name: "sys_increment", schema: incrementSchema }]
     )],
     controllers: [],
     providers: [IncrementService],

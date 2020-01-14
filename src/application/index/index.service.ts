@@ -12,9 +12,6 @@ export interface IndexInderFace extends Document {
 @Injectable()
 export class IndexService {
   constructor(@InjectModel('depositKY') private readonly indexModel: Model<IndexInderFace>) {  }
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   async create(indexDto: IndexInderFace):Promise<IndexInderFace> {
     const createIndex = new this.indexModel(indexDto);
