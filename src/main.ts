@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import * as bodyParser from 'body-parser';
 import { AppModule } from './app';
 // import { NestExpressApplication } from '@nestjs/platform-express'; // express应用程序界面
 
