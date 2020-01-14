@@ -6,7 +6,7 @@ export class IndexController {
   constructor(private readonly indexService: IndexService) {
   }
 
-  @Get()
+  @Get('getHello')
   getHello(): string {
     return this.indexService.getHello();
   }
