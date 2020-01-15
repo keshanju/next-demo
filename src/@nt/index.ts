@@ -7,7 +7,7 @@ import { SQLService } from './services/SQLService';
 import { LoggerService } from './services/LoggerService';
 import { HttpStatusCode } from './controllers/CodeController';
 import { PureController } from './controllers/PureController';
-import { IncrementModule } from './modules/mongodb/increment.module'
+import { IncrementModule } from './modules/increment/increment.module'
 
 export {
     HttpStatusCode,
