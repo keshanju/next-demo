@@ -1,0 +1,151 @@
+Linux常用命令：
+---------------------------------------------------------------
+Ubuntu用户管理
+1、新建用户（以test为例）：
+有useradd和adduser两种；
+sudo useradd test//是一个ELF可执行程序；没有附加参数，用户没有同名主目录、密码和系统shell
+sudo adduser test//是一个perl脚本；有附加参数，会提示输入密码并创建同名目录  
+修改 test 用户的密码：
+passwd test//必须设置大于等于6位的密码
+sudo passwd test//不限制密码长度  
+
+2、新建用户组并加入用户（lebo用户组为例）：
+sudo groupadd lebo
+sudo adduser test lebo  
+
+3、给 test 用户创建自己的目录：
+sudo mkdir /home/test
+chown test /home/test
+
+4、给用户添加sudo权限
+sudo usermod -aG sudo test
+
+5、切换用户
+su test  
+
+6、修改用户信息
+usermod test  
+
+7、查看用户列表/用户组列表
+cat /etc/passwd、cat /etc/group
+--------------------------------------------------------------
+Ubuntu文件管理
+tree /                  //查看全部文件（要先install tree）
+pwd                     //获取当前路径
+~                       //当前用户主目录
+cd ..                   //上一级
+cd ~                    //home目录（/开头是绝对路径；.开头是相对路径）
+mkdir mydir             //新建目录mydir
+mkdir -p father/son/grandson   //建多级目录
+cp test(此处可为路径) father/son/grandson    //将当前目录下的test复制到grandson中
+rm                      //删除文件
+mv  旧名 新名            //重命名
+remove 'y/a-z/A-Z/' *.c  //删文件
+cat test                //查看文件test;-n显示行号
+file test               //查看文件类型
+ls                         //查看当前目录下的文件
+ls -l 文件名称              //查看详细信息（文件夹将-l改为-ld）
+zip index.zip index -r      //压缩index目录下的所有文件到index.zip(要先install zip)
+
+------------------------------------------------------------------
+Ubuntu搜索文件方法
+通用格式:find pathname -options [-print -exec -ok]
+例子:
+find / -name filename 在根目录里面搜索文件名为filename的文件
+find /etc -name *s*在目录里面搜索带有s的文件
+find /etc -name *S 在目录里面搜索以s结尾的文件
+find /etc -name s*在目录里面搜索以s开头的文件
+find / -amin -10在系统中搜索最后１０分钟访问的文件
+find / -atime -2查找在系统中最后４８小时访问的文件
+find / -empty 查找在系统中为空的文件或者是文件夹
+find / -group groupname 查找在系统中属于groupname的文件
+find / -mmin -5查找在系统中最后５分钟修改过的文件
+find / -mtime -1查找在系统中最后２４小时修改过的文件
+find /－nouser查找在系统中属于费用户的文件
+find / -user username 查找在系统中属于username的文件
+find / -ctime -1查找在系统中最后２４小时被改变状态的文件
+find / -fstype type查找在系统中文件类型为？的文件
+find / -user user１name -or -useruser２name查找在系统中属于user1name或着属于user2name的文件
+find / -user user1name -and-user2name在系统中查找既属于user1name又属于user2name用户的文件
+
+-------------------------------------------------------------------
+Ubuntu软件安装
+sudo apt-get install 软件名                  //最常用方法
+sudo  dpkg  -i  package.deb  
+
+python	
+		pip install
+		easy install
+deb
+		dpkg -r package 删除包 
+		dpkg -P package 删除包（包括配置文件）
+		dpkg -L package 列出与该包关联的文件 
+		dpkg -l packag 显示该包的版本e
+		dpkg –unpack package.de 解开 deb 包的内容 
+		dpkg -S keyword 搜索所属的包内容 
+		dpkg -l 列出当前已安装的包
+		dpkg -c package.deb 列出 deb 包的内容 
+		dpkg –configure package 配置包  
+rpm
+
+lrzsz文件传输
+sudo apt-get install lrzsz
+rz	//上传到云（非root权限需要用sudo）；手动拖拽也可以
+sz	//下载到本地
+
+mkdir => 文件夹名称/目录名/创建一个目录 （当前管理员）
+rmdir 空目录名 删除一个空目录
+touch => 文件名称
+
+rm 文件名 文件名 => 删除一个文件或多个文件
+rm -rf => 非空目录名 删除一个非空目录下的一切
+
+ls => 列出当前目录文件（不包括隐含文件）
+ls -a => 列出当前目录文件（包括隐含文件）
+ls -l => 列出当前目录下文件的详细信息
+
+cd .. => 回当前目录的上一级目录
+cd - => 回上一次所在的目录
+cd ~ => 或 cd 回当前用户的宿主目录
+
+ctrl+c:强制停止当前程序  
+ctrl+s:暂停，任意键恢复  
+ctrl+z:后台运行，fg恢复
+
+sodu mkdir => 文件夹名称（全局管理员）
+sudo vim /etc/sudoers => 添加当前管理到用户组中，使其拥有全部权限
+sudo rm -rf data/ => 删除data文件夹
+sudo apt－get install 软件名XXX => 安装软件命令
+sudo nautilus => 打开文件（有root权限）
+sudo apt-get install nginx 下载安装nginx 
+sudo apt-get --purge remove nginx 删除nginx，-purge包括配置文件
+sudo kill -9 XXX   查看nginx正在运行的进程，如果有就kill掉
+sudo service nginx start 启动nginx
+sudo service nginx status 查看nginx状态
+sudo service nginx stop 停止nginx
+sudo service nginx restart 重启nginx
+sudo su root => 切换到“root”
+
+vim文件编辑命令
+:w  保存；
+:w  filename 另存为filename；
+:wq! 保存退出；
+:wq! filename 注：以filename为文件名保存后退出；
+:q! 不保存退出；
+:x 应该是保存并退出 ，功能和:wq!相同
+
+ps -ef |grep nginx
+
+nginx 配置文件路径
+主程序文件：/usr/sbin/nginx
+全局配置文件： /etc/nginx/nginx.conf
+站点的配置文件： /etc/nginx/sites-enabled/default
+用户自己定义的conf配置文件		conf.d：
+错误日志文件 ： /var/log/nginx/error.log
+访问日志文件 ：/var/log/nginx/access.log
+
+注意点：
+1. 在Ubuntu下，$是普通管员，#是系统管理员;(系统管员权限>普通管员)
+
+
+
