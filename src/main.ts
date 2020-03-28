@@ -9,7 +9,7 @@ async function bootstrap() {// 异步引导
 
   app.use(bodyParser.json({ limit: '256mb' }));
   app.use(bodyParser.urlencoded({ limit: '256mb', extended: true }));
-  app.setGlobalPrefix('public');
+  app.setGlobalPrefix('api');
   await app.listen(3000);
 }
 // 应用程序入口文件
